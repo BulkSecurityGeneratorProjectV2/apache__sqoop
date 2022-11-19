@@ -21,6 +21,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 
 import org.apache.sqoop.testcategories.sqooptest.UnitTest;
 import org.apache.sqoop.util.OptionsFileUtil;
@@ -415,7 +416,7 @@ public class TestOptionsFileExpansion {
   }
 
   private String createOptionsFile(String[] data) throws Exception {
-    File file = File.createTempFile("options", ".opf");
+    File file = Files.createTempFile("options", ".opf").toFile();
     file.deleteOnExit();
 
     BufferedWriter writer = null;

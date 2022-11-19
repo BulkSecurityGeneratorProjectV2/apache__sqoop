@@ -23,6 +23,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.file.Files;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -42,7 +44,7 @@ public final class PostgreSQLUtils {
   */
   public static String writePasswordFile(String tmpDir, String password)
     throws IOException {
-    File tempFile = File.createTempFile("pgpass", ".pgpass", new File(tmpDir));
+    File tempFile = Files.createTempFile(new File(tmpDir).toPath(), "pgpass", ".pgpass").toFile();
     LOG.debug("Writing password to tempfile: " + tempFile);
 
     // Make sure it's only readable by the current user.

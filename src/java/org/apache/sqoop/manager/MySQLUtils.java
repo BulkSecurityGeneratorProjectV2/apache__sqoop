@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.file.Files;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -99,7 +100,7 @@ public final class MySQLUtils {
     // Create the temp file to hold the user's password.
     String tmpDir = conf.get(
         ConfigurationConstants.PROP_JOB_LOCAL_DIRECTORY, "/tmp/");
-    File tempFile = File.createTempFile("mysql-cnf", ".cnf", new File(tmpDir));
+    File tempFile = Files.createTempFile(new File(tmpDir).toPath(), "mysql-cnf", ".cnf").toFile();
 
     // Make the password file only private readable.
     DirectImportUtils.setFilePermissions(tempFile, "0600");

@@ -26,6 +26,7 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -130,7 +131,7 @@ public abstract class AccumuloTestCase extends ImportJobTestCase {
   }
 
   protected static void setUpCluster() throws Exception {
-    File temp = File.createTempFile("test", "tmp");
+    File temp = Files.createTempFile("test", "tmp").toFile();
     tempDir = new File(temp.getParent(), "accumulo"
       + System.currentTimeMillis());
     tempDir.mkdir();

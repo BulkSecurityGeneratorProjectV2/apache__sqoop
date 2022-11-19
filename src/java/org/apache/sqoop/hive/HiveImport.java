@@ -25,6 +25,7 @@ import java.io.OutputStreamWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
 import java.security.Policy;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -129,8 +130,7 @@ public class HiveImport implements HiveClient {
    */
   private File getScriptFile(String outputTableName) throws IOException {
     if (!isGenerateOnly()) {
-      return File.createTempFile("hive-script-", ".txt",
-          new File(options.getTempDir()));
+      return Files.createTempFile(new File(options.getTempDir()).toPath(), "hive-script-", ".txt").toFile();
     } else {
       return new File(new File(options.getCodeOutputDir()),
           outputTableName + ".q");

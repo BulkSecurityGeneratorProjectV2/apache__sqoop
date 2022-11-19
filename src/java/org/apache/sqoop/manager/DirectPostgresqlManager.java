@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -329,7 +330,7 @@ public class DirectPostgresqlManager
     */
   private String writeCopyCommand(String command) throws IOException {
     String tmpDir = options.getTempDir();
-    File tempFile = File.createTempFile("tmp-", ".sql", new File(tmpDir));
+    File tempFile = Files.createTempFile(new File(tmpDir).toPath(), "tmp-", ".sql").toFile();
     BufferedWriter w = new BufferedWriter(
         new OutputStreamWriter(new FileOutputStream(tempFile)));
     w.write(command);
